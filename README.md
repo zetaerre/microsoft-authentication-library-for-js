@@ -29,6 +29,22 @@ Internet Explorer does not have native `Promise` support, and so you will need t
 
 See here for more details on [supported browsers and known compatability issues](https://github.com/AzureAD/microsoft-authentication-library-for-js/wiki/FAQs#q4-what-browsers-is-msaljs-supported-on).
 
+## Roadmap and What To Expect From This Library
+Msal support on Javascript is a collection of libraries. msal-core or just simply msal, is the framework agnostic we library. Once our 1.X+ is stabilized, we are going to bring our msal-angular library to 1.x parity.  We are currently no planning on supporting msal-angularjs for 1.x, because the feedback we have heard is that community has moved on, however we will provide some code patterns of how you can use msal-core in an angularjs app. After our current libraries are up to standards, we will begin balancing new feature requests, with new platforms such as `react`, server side `node.js`, `electron`, etc...
+
+Our goal is communicate extremely well with the community and to take their opinions into account. We would like to get to a monthly minor release schedule, with patches comming as often as needed.  The level of communication, planning, and granularity we want to get to will be a work in progress.
+
+Please check our [roadmap](https://github.com/AzureAD/microsoft-authentication-library-for-js/wiki#roadmap) to see what we are workign on and what we are tracking next.
+
+## Oauth and the Implict Flow
+Msal implments the [Implicit Grant Flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-implicit-grant-flow), as defined by the Oauth 2.0 protocol and is [OpenID](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc) compliant.
+
+Our goal is that the library abstracts enough of this away that you can get plug and play authentication, but it is important to know for users that need AAD functionality outside of simple auth, and also important to understand from a security perspective.  There is no client secret, and one less hop between client and server, and so tokens are naturally less secure.  This is mitigated by the use of tokens with a short time to live. We encourage you to read about the flows, and the spec, so that you have a strong understanding of the use case.
+
+## Cache Storage
+
+We offer two methods of storage for Msal, `localStorage` and `sessionStorage`.  Our recommendation is to use `sessionStorage` because it is more secure in storing tokens that are acquired by your users, but `localStorage` will give you Single Sign On accross tabs and user sessions.  We encourge you to explore the options and make the best decision for your application.
+
 ## Usage
 The example below walks you through how to login a user and acquire a token to be used for Microsoft's Graph Api.
 
